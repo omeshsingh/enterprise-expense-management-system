@@ -1,0 +1,10 @@
+package ZIDIO.Development.ENTERPRISE.EXPENSE.MANAGEMENT.SYSTEM.entity;
+
+public enum ExpenseStatus {
+    SUBMITTED,
+    PENDING_MANAGER_APPROVAL,
+    PENDING_FINANCE_APPROVAL,
+    APPROVED,
+    REJECTED,
+    PAID
+}

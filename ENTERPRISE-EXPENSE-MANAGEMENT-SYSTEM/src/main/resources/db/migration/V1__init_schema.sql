@@ -1,0 +1,31 @@
+-- V1__init_schema.sql
+
+CREATE TABLE roles (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL -- e.g., ROLE_EMPLOYEE, ROLE_MANAGER, ROLE_ADMIN
+);
+
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    is_enabled BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_roles (
+    user_id BIGINT NOT NULL,
+    role_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, role_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
+);
+
+INSERT INTO roles (name) VALUES ('ROLE_EMPLOYEE');
+INSERT INTO roles (name) VALUES ('ROLE_MANAGER');
+INSERT INTO roles (name) VALUES ('ROLE_FINANCE'); -- Added FINANCE role
+INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
